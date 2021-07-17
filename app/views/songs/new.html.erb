@@ -6,8 +6,14 @@
   <%= f.label :artist_name %>
   <%= f.text_field :artist_name %><br/>
   <%= f.label :genre_name %>
-  <<%= f.collection_select :genre_name, Genre.all, :name, :name %>
- <%= f.text_field :notes %>
+  <<%= f.select :genre_id, options_from_collection_for_select(Genre.all, 'id', 'name') %>
+  <%# <option value="#{person.id}">#{person.name}</option> %>
+ <%= f.fields_for :notes do |note|%>
+  <%=note.label :note%>
+  <%=note.text_area :content%>
+ <%end%>
+ <input name="song[note_info][]" id="song_notes_1">
+ <input name="song[note_info][]" id="song_notes_2">
 
   <%= f.submit %>
 <% end %>

@@ -19,4 +19,18 @@ class Song < ActiveRecord::Base
   def genre_name
      self.genre ? self.genre.name : nil
   end
+
+  def note_info
+    self.notes.collect(&:content)
+    # the &  sign is a short way of doing this .collect do {|content| content} returnet the content 
+  end
+  def note_info=(notes)
+    notes.each do |note|
+      if note != ""
+        self.notes.build(content: note)
+
+      end
+    end
+  end
+    
 end
